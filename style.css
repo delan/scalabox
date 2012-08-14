@@ -49,7 +49,6 @@ input[type='number'] {
 	right: 1em;
 	top: 1em;
 	background: white;
-	z-index: 1000;
 }
 #show_hide {
 	display: block;
@@ -57,20 +56,27 @@ input[type='number'] {
 	background: #def;
 	text-align: right;
 }
-#about {
+.info_box {
 	border: 1px solid black;
-	width: 40rem;
-	height: 27rem;
 	position: absolute;
 	left: 50%;
 	top: 50%;
-	margin-left: -20em;
-	margin-top: -13.5em;
-	z-index: 1000;
 	background: white;
 	display: none;
 }
-#about_close_link {
+#about {
+	width: 30rem;
+	height: 18rem;
+	margin-left: -15em;
+	margin-top: -9em;
+}
+#how {
+	width: 40rem;
+	height: 26rem;
+	margin-left: -20em;
+	margin-top: -13em;
+}
+.close_link {
 	font-weight: normal;
 	float: right;
 }
@@ -105,4 +111,8 @@ input[type='number'] {
 	right: 15%;
 	top: 15%;
 	opacity: 0.5;
+}
+#footer_links {
+	text-align: center;
+	color: #c0c0c0;
 }

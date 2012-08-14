@@ -6,14 +6,25 @@ $(window).resize(function() {
 	repaint_on.css('z-index', 1);
 });
 
-// about dialog
-$('#about_link').click(function() {
-	$('#about').show(250);
-	return false;
-});
-$('#about_close_link').click(function() {
-	$('#about').hide(250);
-	return false;
+// how? and about dialogs
+var dialog_open = false;
+['how', 'about'].forEach(function(x) {
+	$('#' + x + '_link').click(function() {
+		if (dialog_open) {
+			$('.info_box').hide(250, function() {
+				$('#' + x).show(250);
+			});
+		} else {
+			dialog_open = true;
+			$('#' + x).show(250);
+		}
+		return false;
+	});
+	$('#' + x + ' .close_link').click(function() {
+		dialog_open = false;
+		$('#' + x).hide(250);
+		return false;
+	});
 });
 
 // show/hide
