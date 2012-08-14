@@ -4,261 +4,69 @@
 		<meta charset="utf-8">
 		<title>scalabox</title>
 		<style id="preview_style"></style>
-		<style>
-			* {
-				-moz-box-sizing: border-box;
-				box-sizing: border-box;
-			}
-			*:focus {
-				outline: none;
-			}
-			body {
-				font-family: sans-serif;
-				color: #606060;
-				overflow: hidden;
-			}
-			p {
-				margin: 0.5em 0em;
-			}
-			a {
-				color: blue;
-			}
-			code {
-				font-size: 1rem;
-			}
-			h1, h2 {
-				margin: 0;
-			}
-			h1 {
-				color: black;
-				font-size: 1.5em;
-			}
-			h1 span {
-				color: #a0a0a0;
-				font-size: 1rem;
-			}
-			h2 {
-				font-size: 1em;
-			}
-			label {
-				display: inline-block;
-				width: 12em;
-			}
-			input {
-				width: 4em;
-			}
-			#ui {
-				padding: 1em;
-				border: 1px solid black;
-				position: absolute;
-				right: 1em;
-				top: 1em;
-				background: white;
-			}
-			#about {
-				padding: 1em;
-				border: 1px solid black;
-				width: 40rem;
-				height: 27rem;
-				position: absolute;
-				left: 50%;
-				top: 50%;
-				margin-left: -20em;
-				margin-top: -13.5em;
-				z-index: 1000;
-				background: white;
-				display: none;
-			}
-			#preview_box {
-				background: white;
-				border: 1px solid red;
-			}
-			#style_copy {
-				width: 95%;
-				height: 95%;
-				position: absolute;
-				top: 2.5%;
-				left: 2.5%;
-				background: none;
-				overflow: hidden;
-				border: none;
-			}
-			#size_test_a {
-				background: #00ff00;
-				width: 1em;
-				height: 1em;
-				position: absolute;
-				top: 0;
-				left: 0;
-			}
-			#size_test_b {
-				display: block;
-				width: 25%;
-				height: 15%;
-				position: absolute;
-				right: 5%;
-				bottom: 5%;
-				opacity: 0.25;
-			}
-		</style>
+		<link rel="stylesheet" href="style.css">
 	</head>
 	<body>
 		<section id="ui">
-			<h1>scalabox <span>scalable box generator</span></h1>
-			<p><label for="horizontal_factor">Horizontal factor:</label>
-			<input type="number" id="horizontal_factor" value="2" min="1" step="1">
-			<p><label for="vertical_factor">Vertical factor:</label>
-			<input type="number" id="vertical_factor" value="3" min="1" step="1">
-			<p><label for="margin_percent">Margin percentage:</label>
-			<input type="number" id="margin_percent" value="5" min="0" max="49"
-				step="1">
-			<p><label for="font_size">Font size (% of height):</label>
-			<input type="number" id="font_size" value="2" min="1" max="100"
-				step="1">
-			<p><b>Try resizing the window!</b>
-			<p><a href="#" id="about_link">About scalabox</a>
+			<a href="#" id="show_hide">show/hide</a>
+			<div id="ui_content">
+				<h1>scalabox <span>scalable box generator</span></h1>
+				<p><label for="horizontal_factor">Horizontal factor:</label>
+				<input type="number" id="horizontal_factor"
+					value="2" min="1" step="1">
+				<p><label for="vertical_factor">Vertical factor:</label>
+				<input type="number" id="vertical_factor"
+					value="3" min="1" step="1">
+				<p><label for="margin_percent">Margin percentage:</label>
+				<input type="number" id="margin_percentage"
+					value="5" min="0" max="49" step="1">
+				<p><label for="font_size">Font size (% of height):</label>
+				<input type="number" id="font_size"
+					value="2" min="1" max="100" step="1">
+				<p><label for="font_size">Fallback viewport width:</label>
+				<input type="number" id="fallback_viewport_width"
+					value="400" min="1" step="1">
+				<p><label for="font_size">Element selector:</label>
+				<input type="text" id="element_selector"
+					value="#preview_box">
+				<p><b>Try resizing the window!</b>
+				<p><a href="#" id="about_link">About scalabox</a>
+			</div>
 		</section>
 		<section id="about">
-			<h2>About scalabox</h2>
+			<h2>
+				About scalabox
+				<a href="#" id="about_close_link">return</a>
+			</h2>
 			<p>Scalabox allows you to easily generate CSS for truly scalable
 			(but fixed, not responsive) interfaces positioned centrally on
 			screen, with a defined aspect ratio, margin and font size relative
-			to the box height. It uses the new <b>vw</b> and <b>vh</b> units and
-			<b>aspect-ratio</b> queries.
+			to the box height. It uses the new CSS vw and vh units and
+			aspect-ratio media queries.
 			<p>Manually calculating the values necessary is tricky because two
 			cases are needed; one for when the viewport is wider than the box's
 			aspect ratio, and one for when it is narrower. When the viewport is
-			too wide, all values are in terms of <b>vh</b>, and the height is
-			<b>(100 - 2 * margin) vh</b>. When it's too narrow, everything's in
-			<b>vw</b>, and the width is <b>(100 - 2 * margin) vw</b>.
+			too wide, all values are in terms of vh, and the height is (100 − 2
+			× margin) vh. When it's too narrow, everything's in vw, and the
+			width is the same number of vw.
 			<p>One downside to using this technique is that you can't set
-			relative font sizes with <b>em</b> or <b>%</b>; instead, classes for
-			each 'relative' font size must be defined with pre-calculated size
-			values in terms of <b>vw</b> and <b>vh</b>. This is done for you for
+			relative font sizes with em or %; instead, classes for each
+			'relative' font size must be defined with pre-calculated size values
+			in terms of vw and vh. Thankfully, this is also done for you for
 			several basic sizes.
 			<p>In the preview, the green square is 1em × 1em, and the button is
-			25% × 15%. As of August 2012, only Internet Explorer and
-			WebKit-based browsers such as Google Chrome have support for the
-			<b>vw</b> and <b>vh</b> units necessary for this technique.
-			<p><a href="#" id="about_close_link">Return to scalabox</a>
+			25% × 15%.
+			<p>As of August 2012, the styles generated by scalabox are supported
+			fully in Chrome and Internet Explorer, falling back to a
+			non-scalable box in Firefox that still satisfies the font size,
+			margin and positioning requirements.
 		</section>
 		<div id="preview_box">
 			<div id="size_test_a"></div>
 			<button id="size_test_b" class="text_size_2">Test button</button>
 			<textarea id="style_copy" wrap="off"></textarea>
 		</div>
-		<script>
-			window.addEventListener('resize', function() {
-				document.querySelector('#style_copy').style.zIndex = 1;
-				document.querySelector('#size_test_b').style.zIndex = 1;
-			}, false);
-			document.querySelector('#about_link').addEventListener('click',
-				function(e) {
-					document.querySelector('#about').style.display = 'block';
-					e.preventDefault();
-				}, false);
-			document.querySelector('#about_close_link').addEventListener(
-				'click', function(e) {
-					document.querySelector('#about').style.display = 'none';
-					e.preventDefault();
-				}, false);
-			function update_preview() {
-				var hf = document.querySelector('#horizontal_factor').value,
-					vf = document.querySelector('#vertical_factor').value,
-					mp = document.querySelector('#margin_percent').value,
-					fs = document.querySelector('#font_size').value,
-					ps = document.querySelector('#preview_style'),
-					sc = document.querySelector('#style_copy'),
-					rc = hf + ':' + vf, /* aspect ratio with colon */
-					rs = hf + '/' + vf, /* aspect ratio with slash */
-					wh = (100 - 2 * mp), /* height in vh when wider */
-					ww = wh * hf / vf, /* width in vh when wider */
-					nw = (100 - 2 * mp), /* width in vw when narrower */
-					nh = nw * vf / hf, /* height in vw when narrower */
-					style = '';
-				function generate_font_size_rule_wider(size_in_ems) {
-					return '' +
-					'\t#preview_box *.text_size_' + size_in_ems.toString().
-						replace('.', '_') + ' {\n' +
-					'\t\tfont-size: ' + size_in_ems * wh * fs / 100 + 'vh;\n' +
-					'\t}\n' +
-					'\t#preview_box *.text_size_' + size_in_ems.toString().
-						replace('.', '_') + ' * {\n' +
-					'\t\tfont-size: ' + size_in_ems * wh * fs / 100 + 'vh;\n' +
-					'\t}\n';
-				}
-				function generate_font_size_rule_narrower(size_in_ems) {
-					return '' +
-					'\t#preview_box *.text_size_' + size_in_ems.toString().
-						replace('.', '_') + ' {\n' +
-					'\t\tfont-size: ' + size_in_ems * nh * fs / 100 + 'vw;\n' +
-					'\t}\n' +
-					'\t#preview_box *.text_size_' + size_in_ems.toString().
-						replace('.', '_') + ' * {\n' +
-					'\t\tfont-size: ' + size_in_ems * nh * fs / 100 + 'vw;\n' +
-					'\t}\n';
-				}
-				sc.value = ps.innerHTML = '';
-				style +=
-				'/* scalabox: hf ' + hf + ', vf ' + vf + ', mp ' + mp +
-					', fs ' + fs + ' */\n' +
-				'#preview_box {\n' +
-				'\tposition: absolute;\n' +
-				'}\n' +
-				'/* wider or equal to ' + rc + ' */\n' +
-				'@media all and (min-aspect-ratio: ' + rs + ') {\n' +
-				'\t#preview_box * {\n' +
-				'\t\tfont-size: ' + wh * fs / 100 + 'vh;\n' +
-				'\t}\n' +
-				generate_font_size_rule_wider(0.5) +
-				generate_font_size_rule_wider(0.75) +
-				generate_font_size_rule_wider(1.2) +
-				generate_font_size_rule_wider(1.25) +
-				generate_font_size_rule_wider(1.5) +
-				generate_font_size_rule_wider(1.75) +
-				generate_font_size_rule_wider(2) +
-				generate_font_size_rule_wider(2.5) +
-				generate_font_size_rule_wider(3) +
-				'\t#preview_box {\n' +
-				'\t\twidth: ' + ww + 'vh;\n' +
-				'\t\theight: ' + wh + 'vh;\n' +
-				'\t\tleft: 50%;\n' +
-				'\t\ttop: 50%;\n' +
-				'\t\tmargin-left: -' + ww / 2 + 'vh;\n' +
-				'\t\tmargin-top: -' + wh / 2 + 'vh;\n' +
-				'\t}\n' +
-				'}\n' +
-				'/* narrower or equal to ' + rc + ' */\n' +
-				'@media all and (max-aspect-ratio: ' + rs + ') {\n' +
-				'\t#preview_box * {\n' +
-				'\t\tfont-size: ' + nh * fs / 100 + 'vw;\n' +
-				'\t}\n' +
-				generate_font_size_rule_narrower(0.5) +
-				generate_font_size_rule_narrower(0.75) +
-				generate_font_size_rule_narrower(1.2) +
-				generate_font_size_rule_narrower(1.25) +
-				generate_font_size_rule_narrower(1.5) +
-				generate_font_size_rule_narrower(1.75) +
-				generate_font_size_rule_narrower(2) +
-				generate_font_size_rule_narrower(2.5) +
-				generate_font_size_rule_narrower(3) +
-				'\t#preview_box {\n' +
-				'\t\twidth: ' + nw + 'vw;\n' +
-				'\t\theight: ' + nh + 'vw;\n' +
-				'\t\tleft: 50%;\n' +
-				'\t\ttop: 50%;\n' +
-				'\t\tmargin-left: -' + nw / 2 + 'vw;\n' +
-				'\t\tmargin-top: -' + nh / 2 + 'vw;\n' +
-				'\t}\n' +
-				'}\n';
-				sc.value = style;
-				ps.appendChild(document.createTextNode(style));
-			}
-			Array.prototype.slice.call(document.querySelectorAll('input')).
-				forEach(function(e) {
-					e.addEventListener('change', update_preview, false);
-				});
-			update_preview();
-		</script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+		<script src="script.js"></script>
 	</body>
 </html>
