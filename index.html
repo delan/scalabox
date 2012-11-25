@@ -9,35 +9,45 @@
 	<body>
 		<div id="preview_box">
 			<div id="size_test_a"></div>
-			<button id="size_test_b" class="text_size_2">Test button</button>
+			<button id="size_test_b" class="text_size_2">
+				Test button</button>
 			<textarea id="style_copy" wrap="off"></textarea>
 		</div>
 		<section id="ui">
 			<a href="#" id="show_hide">show/hide</a>
 			<div id="ui_content">
-				<h1>scalabox <span>scalable box generator</span></h1>
-				<p><label for="horizontal_factor">Horizontal factor:</label>
+				<h1>scalabox
+					<span>scalable box generator</span></h1>
+				<p><label for="horizontal_factor">Horizontal
+					factor:</label>
 				<input type="number" id="horizontal_factor"
 					value="2" min="1" step="1">
-				<p><label for="vertical_factor">Vertical factor:</label>
+				<p><label for="vertical_factor">Vertical
+					factor:</label>
 				<input type="number" id="vertical_factor"
 					value="3" min="1" step="1">
-				<p><label for="margin_percent">Margin percentage:</label>
+				<p><label for="margin_percent">Margin
+					percentage:</label>
 				<input type="number" id="margin_percentage"
 					value="5" min="0" max="49" step="1">
-				<p><label for="font_size">Font size (% of height):</label>
+				<p><label for="font_size">Font size (%
+					of height):</label>
 				<input type="number" id="font_size"
 					value="2" min="1" max="100" step="1">
-				<p><label for="font_size">Fallback viewport width:</label>
-				<input type="number" id="fallback_viewport_width"
+				<p><label for="font_size">Fallback
+					viewport width:</label>
+				<input type="number"
+					id="fallback_viewport_width"
 					value="400" min="1" step="1">
-				<p><label for="font_size">Element selector:</label>
+				<p><label for="font_size">Element
+					selector:</label>
 				<input type="text" id="element_selector"
 					value="#preview_box">
 				<p id="footer_links">
 					<a href="#" id="about_link">about</a>
 					&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-					<a href="#" id="how_link">how does it work?</a>
+					<a href="#" id="how_link">how does
+						it work?</a>
 			</div>
 		</section>
 		<section id="how" class="info_box">
@@ -45,45 +55,45 @@
 				How does it work?
 				<a href="#" class="close_link">return</a>
 			</h2>
-			<p>Scalabox was created because manually calculating the values
-			necessary for a truly scalable interface is tricky. Making this
-			worse, two separate cases are needed; one for when the viewport is
-			wider than the box's aspect ratio, and one for when it is narrower.
-			<p>When the viewport is too wide, all values are in terms of vh, and
-			the height is (100 − 2 × margin) vh. When it's too narrow,
-			everything's in vw, and the width is the same number of vw units.
-			<p>In addition to both of the cases being automatically generated,
-			scalabox also generates fallback code for browsers that don't
-			support the vw and vh units, providing for a fixed-size box that's
-			still centered and still has the correct font size.
-			<p>When building interfaces with a scalable box, using absolute
-			positioning for all elements and percentages for all dimensions is
-			optimal. In the preview, the green square is 1em × 1em, and the
-			button is 25% × 15%.
-			<p>One downside to using this technique is that you can't set
-			relative font sizes with em or % because they won't scale; instead,
-			classes for each 'relative' font size must be defined with
-			pre-calculated size values in terms of vw and vh. Thankfully, this
-			is also done for you for several basic sizes.
-			<p>
+	<p>Scalabox was created because manually calculating the values
+	necessary for a truly scalable interface is tricky. Making this
+	worse, two separate cases are needed; one for when the viewport is
+	wider than the box's aspect ratio, and one for when it is narrower.
+	<p>When the viewport is too wide, all values are in terms of vh, and
+	the height is (100 − 2 × margin) vh. When it's too narrow,
+	everything's in vw, and the width is the same number of vw units.
+	<p>In addition to both of the cases being automatically generated,
+	scalabox also generates fallback code for browsers that don't
+	support the vw and vh units, providing for a fixed-size box that's
+	still centered and still has the correct font size.
+	<p>When building interfaces with a scalable box, using absolute
+	positioning for all elements and percentages for all dimensions is
+	optimal. In the preview, the green square is 1em × 1em, and the
+	button is 25% × 15%.
+	<p>One downside to using this technique is that you can't set
+	relative font sizes with em or % because they won't scale; instead,
+	classes for each 'relative' font size must be defined with
+	pre-calculated size values in terms of vw and vh. Thankfully, this
+	is also done for you for several basic sizes.
+	<p>
 		</section>
 		<section id="about" class="info_box">
 			<h2>
 				About scalabox
 				<a href="#" class="close_link">return</a>
 			</h2>
-			<p>Scalabox allows you to easily generate CSS for truly scalable
-			(but fixed, not responsive) interfaces positioned centrally on
-			screen, with a defined aspect ratio, margin and font size relative
-			to the box height. It uses the new CSS vw and vh units and
-			aspect-ratio media queries.
-			<p>As of August 2012, the styles generated by scalabox are supported
-			fully in Chrome and Internet Explorer, falling back to a
-			non-scalable box in Firefox, iOS, Android and other browsers.
-			<p>Scalabox is written by <a href="//azabani.com">Delan Azabani</a>.
-			It's released under the <a
-			href="//en.wikipedia.org/wiki/MIT_License">MIT license</a> and can
-			be found on <a href="//github.com/delan/scalabox">GitHub</a>.
+	<p>Scalabox allows you to easily generate CSS for truly scalable
+	(but fixed, not responsive) interfaces positioned centrally on
+	screen, with a defined aspect ratio, margin and font size relative
+	to the box height. It uses the new CSS vw and vh units and
+	aspect-ratio media queries.
+	<p>As of August 2012, the styles generated by scalabox are supported
+	fully in Chrome and Internet Explorer, falling back to a
+	non-scalable box in Firefox, iOS, Android and other browsers.
+	<p>Scalabox is written by <a href="//azabani.com">Delan Azabani</a>.
+	It's released under the <a
+	href="//en.wikipedia.org/wiki/MIT_License">MIT license</a> and can
+	be found on <a href="//github.com/delan/scalabox">GitHub</a>.
 		</section>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
 		<script src="script.js"></script>
